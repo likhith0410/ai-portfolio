@@ -1,107 +1,57 @@
-# Likhith Gowda — AI Portfolio
+# Likhith Gowda T R — AI Portfolio
 
 A production-grade personal portfolio with a live AI chatbot powered by OpenRouter.
 
 ## Live Demo
-- Frontend: https://likhith-portfolio.onrender.com
-- Backend API: https://likhith-portfolio-api.onrender.com/api/docs
+
+- **Portfolio:** https://ai-portfolio-rze9.vercel.app
+- **Backend API:** https://ai-portfolio-hr2f.onrender.com/api/docs
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + TypeScript + Vite + Framer Motion |
-| Backend | Python FastAPI + SQLite |
-| AI | OpenRouter (free LLMs — no credit card needed) |
-| Security | Rate limiting, prompt injection blocking, CORS, security headers |
-| Deployment | Render (backend) + Render Static (frontend) |
+**Frontend**
+- React 18 + TypeScript
+- Framer Motion (animations)
+- Vite (build tool)
+
+**Backend**
+- Python FastAPI
+- SQLite + aiosqlite
+- OpenRouter API (free AI models)
+
+**DevOps**
+- Frontend hosted on Vercel
+- Backend hosted on Render
+- GitHub Actions ready
 
 ## Features
-- Animated hero with typewriter effect
-- Smooth scroll sections: About, Skills, Experience, Projects, Contact
-- Live AI chatbot trained on resume data
-- Contact form with SQLite storage
-- Fully responsive dark editorial design
-- Production security: rate limiting, input sanitization, JWT-ready
+
+- AI chatbot that answers questions about my skills and experience
+- Contact form with email notifications
+- Fully responsive (mobile + desktop)
+- Rate limiting and input sanitization
+- Lazy loaded components for fast performance
 
 ## Local Setup
 
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-
-### Backend
+**Backend:**
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate   # Windows
+.venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env
-# Add your free OpenRouter key to .env
 uvicorn main:app --reload --port 8000
 ```
 
-### Frontend
+**Frontend:**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000
-
-### Free OpenRouter API Key
-1. Go to https://openrouter.ai
-2. Sign up with Google or GitHub (no credit card)
-3. Keys tab > Create Key
-4. Paste into `backend/.env`
-
-## Deployment on Render
-
-### Backend
-1. New Web Service > Connect GitHub repo
-2. Root directory: `backend`
-3. Build: `pip install -r requirements.txt`
-4. Start: `gunicorn main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT`
-5. Add env vars: `OPENROUTER_API_KEY`, `ENVIRONMENT=production`, `ALLOWED_ORIGINS`
-
-### Frontend
-1. New Static Site > Connect GitHub repo
-2. Root directory: `frontend`
-3. Build: `npm install && npm run build`
-4. Publish: `dist`
-5. Add env var: `VITE_API_URL=https://your-backend.onrender.com`
-
-## Project Structure
+Add your free OpenRouter API key to `backend/.env`:
 ```
-ai-portfolio/
-├── backend/
-│   ├── app/
-│   │   ├── api/          # chat.py, contact.py, health.py
-│   │   ├── core/         # config, security, database, resume
-│   │   ├── models/       # pydantic schemas
-│   │   └── services/     # ai_service.py
-│   ├── main.py
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── components/   # Navbar, Hero, About, Skills, Experience, Projects, Contact, ChatWidget
-│   │   ├── hooks/        # useChat.ts
-│   │   ├── services/     # api.ts
-│   │   └── styles/       # globals.css
-│   └── vite.config.ts
-└── README.md
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
-
-## Security
-- Rate limiting: 20 requests/minute per IP
-- Prompt injection detection and blocking
-- Input sanitization (XSS, SQL injection patterns)
-- CORS origin whitelist
-- Security headers (X-Frame-Options, HSTS, CSP)
-- IP hashing (no raw IPs stored in DB)
-
-## Author
-Likhith Gowda T R  
-likhithgowda88923@gmail.com  
-github.com/likhith0410
+Get a free key at https://openrouter.ai — no credit card needed.
