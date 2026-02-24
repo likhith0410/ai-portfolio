@@ -14,7 +14,6 @@ router = APIRouter(prefix="/api/contact", tags=["contact"])
 
 def send_email_notification(name: str, email: str, message: str):
     """Send email to Likhith when someone fills the contact form."""
-    # Only send if email credentials are configured in .env
     if not settings.smtp_user or not settings.smtp_pass:
         logger.info("Email not configured - message saved to DB only")
         return
@@ -35,17 +34,27 @@ def send_email_notification(name: str, email: str, message: str):
             <p><strong style="color: #f59e0b;">Message:</strong></p>
             <p style="background: #1a1a24; padding: 1rem; border-radius: 8px; line-height: 1.7;">{message}</p>
             <hr style="border-color: rgba(255,255,255,0.1); margin: 1rem 0;">
-            <p style="color: #5a5a7a; font-size: 0.85rem;">Sent from your AI Portfolio at likhith-portfolio</p>
+            <p style="color: #5a5a7a; font-size: 0.85rem;">Sent from your AI Portfolio — ai-portfolio-rze9.vercel.app</p>
           </div>
         </body></html>
         """
 
         msg.attach(MIMEText(html, "html"))
 
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        # Use port 587 with STARTTLS — works on Render (port 465 SSL is often blocked)
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
             server.login(settings.smtp_user, settings.smtp_pass)
             server.send_message(msg)
+
         logger.info(f"Email notification sent for contact from {email}")
+
+    except smtplib.SMTPAuthenticationError:
+        logger.error("SMTP Authentication failed - check SMTP_USER and SMTP_PASS in environment variables")
+    except smtplib.SMTPConnectError:
+        logger.error("SMTP Connection failed - port 587 may be blocked on this server")
     except Exception as e:
         logger.error(f"Failed to send email notification: {e}")
 
@@ -55,7 +64,7 @@ async def submit_contact(
     body: ContactRequest,
     db: aiosqlite.Connection = Depends(get_db),
 ):
-    # Save to database
+    # Always save to database first
     await db.execute(
         "INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)",
         (body.name, body.email, body.message),
@@ -63,7 +72,7 @@ async def submit_contact(
     await db.commit()
     logger.info(f"Contact form submission from {body.email}")
 
-    # Send email notification (non-blocking - won't fail the response if email fails)
+    # Send email notification (non-blocking)
     try:
         send_email_notification(body.name, body.email, body.message)
     except Exception as e:
