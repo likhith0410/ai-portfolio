@@ -7,9 +7,9 @@ from app.core.resume import get_system_prompt
 logger = logging.getLogger(__name__)
 
 FREE_MODELS = [
-    "qwen/qwen3-coder:free",
-    "openai/gpt-oss-20b:free",
     "stepfun/step-3.5-flash:free",
+    "liquid/lfm-2.5-1.2b-instruct:free",
+    "nvidia/nemotron-nano-9b-v2:free",
 ]
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
