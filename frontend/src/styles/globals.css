@@ -1,0 +1,157 @@
+:root {
+  --ink:        #0a0a0f;
+  --ink-2:      #111118;
+  --ink-3:      #1a1a24;
+  --surface:    #16161f;
+  --surface-2:  #1e1e2a;
+  --border:     rgba(255,255,255,0.07);
+  --border-2:   rgba(255,255,255,0.12);
+  --amber:      #f59e0b;
+  --amber-dim:  #d97706;
+  --amber-glow: rgba(245,158,11,0.15);
+  --text:       #e8e8f0;
+  --text-2:     #9999b3;
+  --text-3:     #5a5a7a;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono:  'DM Mono', 'Courier New', monospace;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --radius:     12px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--ink);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+::selection { background: var(--amber); color: var(--ink); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink-2); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--amber-dim); }
+
+a { color: var(--amber); text-decoration: none; transition: opacity var(--transition); }
+a:hover { opacity: 0.8; }
+button { cursor: pointer; font-family: var(--font-sans); }
+h1, h2, h3 { font-family: var(--font-serif); line-height: 1.2; }
+.mono  { font-family: var(--font-mono); }
+.amber { color: var(--amber); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/*  Mobile Responsive Fixes                                                    */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Sections padding */
+  section {
+    padding: 5rem 1.25rem !important;
+  }
+
+  /* Hero */
+  #hero {
+    padding: 0 1.25rem !important;
+  }
+  #hero > div {
+    padding-top: 90px !important;
+  }
+
+  /* Navbar */
+  nav {
+    padding: 0 1.25rem !important;
+  }
+
+  /* Skills grid */
+  div[style*="minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Projects grid */
+  div[style*="minmax(400px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About grid */
+  div[style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Stats grid */
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Chat widget - full width on mobile */
+  div[style*="min(420px"] {
+    width: calc(100vw - 1rem) !important;
+    right: 0.5rem !important;
+    bottom: 5rem !important;
+    height: 70vh !important;
+  }
+
+  /* Chat button position */
+  button[title*="Chat"] {
+    bottom: 1.25rem !important;
+    right: 1.25rem !important;
+  }
+
+  /* Contact links wrap */
+  div[style*="gap: '1.5rem'"] {
+    gap: 1rem !important;
+  }
+
+  /* Footer stack */
+  footer {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Experience timeline */
+  div[style*="paddingLeft: '2.5rem'"] {
+    padding-left: 1.75rem !important;
+  }
+
+  /* Scroll indicator hide on mobile */
+  div[style*="writingMode: 'vertical-rl'"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small phones */
+  h1 {
+    font-size: clamp(2.5rem, 14vw, 4rem) !important;
+  }
+
+  section {
+    padding: 4rem 1rem !important;
+  }
+
+  /* Stats 2 col still fine */
+  /* Project cards full width */
+  div[style*="minmax(400px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
