@@ -24,7 +24,14 @@ export function ChatWidget() {
     <>
       <motion.button onClick={() => setOpen((o) => !o)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} title="Chat with Likhith AI"
         style={{ position: 'fixed', bottom: '2rem', right: '2rem', width: '60px', height: '60px', borderRadius: '50%', background: open ? 'var(--surface-2)' : 'var(--amber)', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', boxShadow: '0 8px 32px rgba(245,158,11,0.35)', zIndex: 2000, cursor: 'pointer', transition: 'background 0.3s' }}>
-        {open ? 'x' : '💬'}
+        {open ? '✕' : (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#080810">
+            <path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/>
+          </svg>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.48rem', fontWeight: 700, color: '#080810', letterSpacing: '0.04em' }}>AI</span>
+        </div>
+      )}
       </motion.button>
 
       <AnimatePresence>
