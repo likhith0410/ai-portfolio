@@ -29,8 +29,8 @@ export function Hero() {
             <span style={{ color: 'var(--amber)', marginLeft: '2px' }}>_</span>
           </motion.div>
           <motion.p variants={item} style={{ fontSize: '1.05rem', color: 'var(--text-2)', maxWidth: '580px', lineHeight: 1.8, marginBottom: '3rem' }}>
-            Building scalable web apps, LangChain RAG pipelines, and cloud-native systems. 
-            Proficient in Python, Django, React.js, and AWS. Currently interning at WorkshopEdge, Bengaluru.
+            Full Stack and DevOps Engineer with AI/ML expertise from Bangalore. I build production-grade systems using Python, Django, React.js and LangChain-powered RAG pipelines, 
+            while implementing cloud infrastructure, CI/CD pipelines and scalable deployment strategies.
           </motion.p>
           <motion.div variants={item} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#projects"
