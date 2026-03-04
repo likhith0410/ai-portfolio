@@ -14,7 +14,7 @@ export function About() {
               Code, Cloud,<br /><em style={{ color: 'var(--text-2)' }}>and AI</em>
             </h2>
             <p style={{ color: 'var(--text-2)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '1rem' }}>
-              Full Stack Developer and AI/ML Engineer from Bangalore. I build production-grade systems with Python, Django, React.js, and LangChain-powered RAG pipelines.
+              Building scalable web apps, LangChain RAG pipelines and cloud-native systems with integrated DevOps practices. Proficient in Python, Django, React.js, AWS and CI/CD workflows for reliable deployment and automation.
             </p>
             <p style={{ color: 'var(--text-2)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
               Currently at WorkshopEdge building FastAPI backends and Django task management systems. B.E. Computer Science graduate (CGPA 8.1) from Impact College, Bengaluru.
